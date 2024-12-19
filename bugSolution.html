@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    let div = document.getElementById("myDiv");
+    div.innerHTML = "<p data-custom='hello'>This is a paragraph.</p>";
+    let p = div.querySelector('p');
+    // Accessing properties using dataset is safer and more reliable
+    let customData = p.dataset.custom;
+    console.log(customData); // Outputs 'hello'
+    let nonExistentData = p.dataset.nonExistent; //Returns undefined as expected
+    console.log(nonExistentData); // Outputs undefined
+  </script>
+</body>
+</html>
