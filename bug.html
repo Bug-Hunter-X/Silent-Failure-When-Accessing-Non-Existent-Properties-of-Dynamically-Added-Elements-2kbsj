@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    // Attempting to access a non-existent property of an element
+    // that is loaded via innerHTML, where the property should exist
+    let div = document.getElementById("myDiv");
+    let myProperty = div.getAttribute('nonExistent'); // should return null
+    div.innerHTML = "<p data-custom='hello'>This is a paragraph.</p>";
+    let p = div.querySelector('p');
+    let customData = p.dataset.custom;
+    //console.log(customData) // this works
+    let nonExistentData = p.dataset.nonExistent; // should return undefined
+    console.log(nonExistentData); 
+    //The problem is not the error in the console, but that the following line fails silently
+    let anotherNonExistent = p.nonExistent; // this fails silently
+    console.log(anotherNonExistent); // this does not print undefined!
+  </script>
+</body>
+</html>
